@@ -1,0 +1,63 @@
+/*************
+    owl home
+**************/
+
+.owl-home{
+	position:relative;
+	background:#000;
+	margin: -1rem 0 .5rem;
+}
+/*
+.owl-home .owl-nav{
+	display:flex;
+	justify-content:space-between;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:15px;
+	right:15px;
+}*/
+.owl-home .owl-nav .owl-prev,
+.owl-home .owl-nav .owl-next{
+	position:absolute;
+	top:50%;
+}
+.owl-home .owl-nav .owl-prev{
+	left:15px
+}
+.owl-home .owl-nav .owl-next{
+	right:15px;
+}
+
+.owl-home {
+	position:relative;
+}
+.owl-home .owl-legend.owl-legend.owl-legend{
+    background:white;
+    font-weight:600;
+}
+
+.owl-home .owl-nav span{
+	font-size: 2rem;
+}
+.owl-home .item{
+	position:relative;
+}
+.owl-home .item .owl-legend{
+	position:absolute;
+	bottom:15px;
+	left:15px;
+	right:15px;
+	background:rgba(255,255,255,0.6);
+	color:black;
+	padding:15px;
+	border-radius:15px;
+}
+@media screen and (min-width:768px){
+	.owl-home .owl-item{
+		opacity:0.4;
+	}
+	.owl-home .owl-item.center{
+		opacity:1;
+	}
+}

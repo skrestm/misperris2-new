@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}{{page_title}}{% endblock %}
+{% block content %}
+<section class="owl-home owl-carousel">
+    {% for slide in slider %}
+    <div class="item">
+        <div class="owl-legend">{{slide.descripcion}}</div>
+        <img src="{{ slide.img.url }}">
+    </div>
+    {% endfor %}
+</section>
+
+<section class="container">
+    <div class="row blog">
+        {% for post in posts %}
+        <article class="col-sm-6 post">
+            {% if forloop.counter|divisibleby:2 %}
+            <picture class="d-block my-3">
+                <img class="img-fluid img-section" src="{{post.img.url}}">
+            </picture>
+            <h2 class="section-title">{{post.titulo}}
+                <small>{{post.subtitulo}}</small>
+            </h2>
+
+            {%else%}
+
+            <h2 class="section-title">{{post.titulo}}
+                <small>{{post.subtitulo}}</small>
+            </h2>
+            <picture class="d-block my-3">
+                <img class="img-fluid img-section" src="{{post.img.url}}">
+            </picture>
+            {%endif%}
+
+            <section>
+                {{post.contenido}}
+            </section>
+            {% if post.enlace_externo|length > 0 %}
+            <div class="my-3">
+                <a class="btn btn-outline-dark" href="{{post.enlace_externo}}">
+                    {{post.enlace_externo_titulo}}
+                </a>
+            </div>
+            {% endif %}
+
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

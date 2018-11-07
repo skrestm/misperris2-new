@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% block title %}Mis Perris | {{page_title}}{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="">{{page_title}}</h1>
+            <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                    <a href="{% url 'perros' %}" class="btn btn-outline-dark">Todos</a>
+                    <a href="{% url 'perros_rescatados' %}" class="btn btn-outline-dark">Rescatados</a>
+                    <a href="{% url 'perros_disponibles' %}" class="btn btn-outline-dark">Disponibles para adopción</a>
+                    <a href="{% url 'perros_adoptados' %}" class="btn btn-outline-dark">Adoptados</a>
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'perros_new' %}" class="  btn btn-success"><i class="fas fa-dog"></i> Nuevo</a>
+                    {% endif %}
+                  </div>
+        </div>
+       
+        {% for p in perros %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <a href="{% url 'perros_detail' pk=p.pk %}">
+                <div class="card h-100 ">
+                    <div class="img-square cover">
+                        <picture>
+                            <img src="{{p.fotografia.url}}" alt="{{p.nombre}}">
+                        </picture>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.nombre}}</h5>
+                        {%if p.estado == 'rescatado'%}
+                        <span class="badge badge-pill badge-info">
+                            <i class="fas fa-ambulance"></i> {{p.estado}}
+                        </span>
+                        {% elif p.estado == 'adoptado'%}
+                        <span class="badge badge-pill badge-success">
+                            <i class="fas fa-home"></i> {{p.estado}}
+                        </span>
+                        {%else%}
+                        <span class="badge badge-pill badge-primary">
+                            <i class="fas fa-paw"></i></i> {{p.estado}}
+                        </span>
+                        {%endif%}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        
+        {%if perros|length < 1%}
+            <div class="jumbotron col-12">
+                <h1 class="display-4">Lo sentimos :(</h1>
+                <p class="lead">
+                Aun no perros listos para ser adoptados</p>
+            </div>
+        {%endif%}
+        
+    </div>
+</main>
+{% endblock %}

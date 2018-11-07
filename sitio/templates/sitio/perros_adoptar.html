@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="row">
+    <div class="col-sm-6">
+        <h1>{{ name_page }}</h1>
+        <form method="POST" enctype="multipart/form-data" class="post-form">
+            {% csrf_token %}
+
+            {% form.estado %}
+            <button type="submit">Adoptar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

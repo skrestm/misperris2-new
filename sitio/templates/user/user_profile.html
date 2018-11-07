@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<main class="container">
+        <article class="row">
+                        {% if user.is_authenticated %}
+                <div class="col-md-4">
+                        <h1 class="h3">Informacion de Usuario</h1>
+                        <p><i class="fas fa-user-circle"></i> {{ user}}</p>
+                        <p>{{ user.first_name}}{{ user.last_name}}</p>
+                        <p><i class="far fa-envelope"></i> {{ user.email}}</p>
+
+                        <form class="d-inline-block" action="{% url 'user_logout'%}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" type="submit" title="salir"><i class="fas fa-power-off"> Salir</i></button>
+                        </form>
+                        {% if user.is_staff%}
+                                <a class="btn btn-dark" href="/admin"><i class="fas fa-sliders-h"></i> Administracion</a>
+                        {% endif %}
+                </div>
+                <div class="col-md-8">
+                        <div class="row">
+                                <h3 class="col-12">Perros Adoptados</h3>
+                                {% for p in perros %}
+                                <div class="col-sm-4  mb-3">
+                                        <a href="{% url 'perros_detail' pk=p.pk %}">
+                                                <div class="card h-100 ">
+                                                        <div class="img-square cover">
+                                                                <picture>
+                                                                        <img src="{{p.fotografia.url}}" alt="{{p.nombre}}">
+                                                                </picture>
+                                                        </div>
+                                                        <div class="card-body">
+                                                                <h5 class="card-title">{{p.nombre}}</h5>
+                                                        </div>
+                                                </div>
+                                        </a>
+                                </div>
+                                {% endfor %}
+                        </div>
+                </div>
+                {% else %}
+                necesitas loguearte
+                {% endif %}
+                </div>
+        </article>
+</main>
+
+{% endblock %}

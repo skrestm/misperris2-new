@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <form class="user-form" action="{% url 'user_login' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p}}
+                <button class="btn btn-success" type="submit">Iniciar Sesión</button>
+                <a href="{% url 'user_register' %}">Crear Usuario</a>
+            </form>
+            <p class="my-3">
+                ¿Olvidaste tu contraseña? 
+                <a href="{% url 'password_reset'%}">Recuperar contraseña</a>
+            </p>
+            
+        </div>
+    </div>
+
+</main>
+{% endblock %}

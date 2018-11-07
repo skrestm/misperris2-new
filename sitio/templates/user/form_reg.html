@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="user-form" action="{% url 'user_register' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-field">
+                    {{ form.username.label_tag }}
+                    {{ form.username.errors }}
+                    {{ form.username }}
+                </div>
+                <div class="form-field">
+                    {{ form.first_name.errors }}
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-field">
+                    {{ form.last_name.errors }}
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-field">
+                    {{ form.email.errors }}
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+
+                <div class="form-field">
+                    {{ form.password1.errors }}
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                </div>
+                <div class="form-field">
+                    {{ form.password2.errors }}
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    <div class="form-field">
+                        <div class="mt-2 mb-5">
+                            <button class="btn btn-outline-dark float-right" type="submit">Enviar Registro</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

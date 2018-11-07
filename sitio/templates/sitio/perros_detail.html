@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<main class="container">
+    <article class="row">
+        <div class="col-sm-4">
+            <img class="rounded img-responsive" src="{{perro.fotografia.url}}" alt="{{perro.nombre}}">
+        </div>
+        <div class="col">
+            <div>
+                {% if request.user.is_staff %}
+                    <a class="btn btn-secondary" href="{% url 'perros_edit' pk=perro.pk %}">editar</a>
+                    <a class="btn btn-danger" href="{% url 'perros_delete' pk=perro.pk %}">Borrar</a>
+                {% else %}
+                    {% if perro.estado != 'adoptado' %}
+                        <a class="btn btn-success" href="{% url 'perros_update' pk=perro.pk %}">Adoptar</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+                {%if perro.estado == 'rescatado'%}
+                <span class="badge badge-pill badge-info">
+                    <i class="fas fa-ambulance"></i> {{perro.estado}}
+                </span>
+                {% elif perro.estado == 'adoptado'%}
+                <span class="badge badge-pill badge-success">
+                    <i class="fas fa-home"></i> {{perro.estado}}
+                </span>
+                {%else%}
+                <span class="badge badge-pill badge-primary">
+                    <i class="fas fa-paw"></i></i> {{perro.estado}}
+                </span>
+                {%endif%}
+            <h1>
+                {{perro.nombre}}
+            </h1>
+            <p>
+                {{perro.descripcion}}
+            </p>
+            
+        </div>
+    </article>
+</main>
+{% endblock %}
